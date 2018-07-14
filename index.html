@@ -2,22 +2,21 @@
 <html>
   <head>
     <title>S3 Image Test</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
     <script>
-      var img;
-      
-      function preload(){
-      	 img = loadImage('https://s3.amazonaws.com/my-uploaded-files/images/cat.jpg');  
-      }
-      function setup(){
-        createCanvas(500, 500);
-      }
-      
-      function draw(){
-      	image(img, 0, 0, width, height);  
-      }
+    function loadImage(){
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      var img = new Image();
+      img.onload = function() {
+	    ctx.drawImage(img, 0, 0);
+  	    var myData = ctx.getImageData(0, 0, img.width, img.height);
+        console.log('data: ' + myData);
+      };
+      img.src = 'https://s3.amazonaws.com/my-uploaded-files/images/cat.jpg';
+    }
     </script>
   </head>
-  <body>
+  <body onload="loadImage()">
+    <canvas id="myCanvas"></canvas>
   </body>
 </html>
