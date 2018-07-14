@@ -5,12 +5,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
     <script>
       var img;
+      
+      function preload(){
+      	 img = loadImage('https://s3.amazonaws.com/my-uploaded-files/images/cat.jpg');  
+      }
       function setup(){
         createCanvas(500, 500);
-        img = loadImage('https://s3.amazonaws.com/my-uploaded-files/images/cat.jpg', loadImage);
       }
       
-      function loadImage(){
+      function draw(){
       	image(img, 0, 0, width, height);  
       }
     </script>
