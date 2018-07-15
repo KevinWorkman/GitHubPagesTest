@@ -3,18 +3,21 @@
   <head>
     <title>S3 Image Test</title>
     <script>
-      function loadImage(){
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
-        var img = new Image();
-        img.onload = function() {
-          ctx.drawImage(img, 0, 0);
-        };
-        img.src = 'https://s3.amazonaws.com/my-uploaded-files/images/cat.jpg';
-      }
+    function loadImage(){
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      var img = new Image();
+      img.onload = function() {
+	    ctx.drawImage(img, 0, 0);
+  	    var myData = ctx.getImageData(0, 0, img.width, img.height);
+        console.log('data: ' + myData);
+      };
+      img.crossOrigin = 'Anonymous';
+      img.src = 'https://s3.amazonaws.com/my-uploaded-files/images/cat.jpg';
+    }
     </script>
   </head>
   <body onload="loadImage()">
-    <canvas id="myCanvas" style="width:500px; height:500px;"></canvas>
+    <canvas id="myCanvas"></canvas>
   </body>
 </html>
